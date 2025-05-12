@@ -14,16 +14,16 @@ int nuevoEstado = 0;
 String mainString;
 
 void setup() {
-  ARGLF.begin(9600);  // Inicializa la comunicación del módulo Bluetooth
-  Serial.begin(9600); // Inicializa la comunicación del puerto serie del Arduino para depuración
+  ARGLF.begin(9600);  
+  Serial.begin(9600); 
   pinMode(9, OUTPUT);
   strip.begin();
-  strip.show();       // Inicializa la tira LED
+  strip.show();      
   Serial.println("Setup completo");
 }
 
 void loop() {
-  // Lee datos del módulo Bluetooth
+ 
   if (ARGLF.available() > 0) {
     mainString = ARGLF.readString();
     byte firstCommaIndex = mainString.indexOf(',');
@@ -36,7 +36,7 @@ void loop() {
     int g = green.toInt();
     int b = blue.toInt();
 
-    setColor(g, r, b); // Actualiza los LEDs con el color recibido
+    setColor(g, r, b); 
 
     Serial.println("Color recibido:");
     Serial.print("R: "); Serial.println(r);
@@ -44,7 +44,7 @@ void loop() {
     Serial.print("B: "); Serial.println(b);
   }
 
-  // Ejecuta acciones según el estado recibido
+
   if (ARGLF.available() > 0) {
     nuevoEstado = ARGLF.read();
     if (nuevoEstado != estado) {
@@ -80,7 +80,7 @@ void setColor(int r, int g, int b) {
 
 void rgb() {
   for (int i = 0; i < strip.numPixels(); i++) {
-    strip.setPixelColor(i, strip.Color(0, 255, 0)); // Verde
+    strip.setPixelColor(i, strip.Color(0, 255, 0)); 
     strip.show();
     delay(50);
     if (ARGLF.available() > 0) {
@@ -92,7 +92,7 @@ void rgb() {
     }
   }
   for (int i = 0; i < strip.numPixels(); i++) {
-    strip.setPixelColor(i, strip.Color(255, 0, 0)); // Rojo
+    strip.setPixelColor(i, strip.Color(255, 0, 0)); 
     strip.show();
     delay(50);
     if (ARGLF.available() > 0) {
@@ -104,7 +104,7 @@ void rgb() {
     }
   }
   for (int i = 0; i < strip.numPixels(); i++) {
-    strip.setPixelColor(i, strip.Color(0, 0, 255)); // Azul
+    strip.setPixelColor(i, strip.Color(0, 0, 255)); 
     strip.show();
     delay(50);
     if (ARGLF.available() > 0) {
